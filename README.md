@@ -1,0 +1,1 @@
+# retailsync-pos
