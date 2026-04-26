@@ -1,45 +1,11 @@
-const Product = require("../models/Product");
+const express = require("express");
+const router = express.Router();
 
-// Add Product
-exports.addProduct = async (req, res) => {
-  try {
-    const product = await Product.create(req.body);
-    res.json(product);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-};
+router.get("/", (req, res) => {
+  res.json([
+    { _id: 1, name: "Laptop", price: 50000 },
+    { _id: 2, name: "Phone", price: 20000 },
+  ]);
+});
 
-// Get All Products
-exports.getProducts = async (req, res) => {
-  try {
-    const products = await Product.find();
-    res.json(products);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-};
-
-// Update Product
-exports.updateProduct = async (req, res) => {
-  try {
-    const product = await Product.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
-    res.json(product);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-};
-
-// Delete Product
-exports.deleteProduct = async (req, res) => {
-  try {
-    await Product.findByIdAndDelete(req.params.id);
-    res.json({ message: "Product deleted" });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-};
+module.exports = router;
