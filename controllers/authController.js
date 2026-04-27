@@ -19,15 +19,15 @@ const registerUser = async (req, res) => {
       email,
       password: hashedPassword,
     });
+res.status(201).json({
+  _id: user._id,
+  name: user.name,
+  email: user.email,
+  token: jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    expiresIn: "1d",
+  }),
+});
 
-    res.status(201).json({
-      message: "User registered successfully",
-      user,
-    });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
 
 // LOGIN
 const loginUser = async (req, res) => {
