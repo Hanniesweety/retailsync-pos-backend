@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+console.log("NEW AUTH ROUTE LOADED");
 const {
   registerUser,
   loginUser
